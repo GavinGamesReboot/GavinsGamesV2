@@ -1,0 +1,82 @@
+@import url("https://db.onlinewebfonts.com/c/7df4d03e072bfaf9685f06ed5d179aff?family=Quartz+MS");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#clock {
+    opacity: 50%;
+    color: white;
+    font-family: 'Quartz MS', sans-serif;
+    font-size: 50px;
+    position: absolute;
+    top: 2%;
+    right: 2%;
+}
+
+#hide-button {
+    width: 10%;
+    position: absolute;
+}
+
+#game {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+#game-render {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+#turn-left, #turn-right, #go-front, #turn-back {
+    position: absolute;
+    height: 100%;
+    width: 30%;
+}
+
+#turn-back {
+    width: 100%;
+    height: 20%;
+    bottom: 0%;
+}
+
+#go-front {
+    right: 50%;
+    left: 50%;
+    width: 40%;
+    transform: translateX(-50%);
+}
+
+#turn-right {
+    right: 0%;
+}
+
+#night-finished, #hours-minutes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: none;
+}
+
+
+
+#clock-placeholder, #some-time {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-family: 'Quartz MS', sans-serif;
+    font-size: 100px;
+}
+
+#clock-placeholder {
+    color: white;
+    opacity: 40%;
+}

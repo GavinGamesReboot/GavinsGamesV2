@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools - Gavin’s Games</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Tools</h1>
+        <div class="nav-links">
+            <a class="nav-link" href="../OPEN%20WEBSITE%20HERE.html">Home</a>
+            <a class="nav-link" href="other_games.html">Other Games</a>
+            <a class="nav-link" href="help.html">Help & Support</a>
+            <a class="nav-link" href="tools.html">Tools</a>
+            <a class="nav-link" href="emulators.html">Emulators</a>
+        </div>
+    </header>
+    <div class="container" id="gridContainer">
+        <div class="grid-item" data-name="GavinSoft Paint">
+            <a href="Tools/Drawing/GavinSoftPaint.html" target="_blank">
+                <img src="Tools/Drawing/GavinSoftPaint.png" alt="GavinSoft Paint">
+                <p>GavinSoft Paint</p>
+            </a>
+        </div>
+        <div class="grid-item" data-name="Tool 2">
+            <a href="Tools/wordlebot/wordlebot.html" target="_blank">
+                <img src="Tools/wordlebot/wordlebot.png" alt="Tool 2">
+                <p>Wordle Bot</p>
+            </a>
+        </div>
+        <!-- Add more tool blocks as needed -->
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const items = document.querySelectorAll('#gridContainer .grid-item');
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('fade-in');
+                }, index * 50); // 50ms interval between each item
+            });
+        });
+    </script>
+    <footer>
+        Developed and Created by Gavin James Caldwell
+    </footer>
+</body>
+</html>

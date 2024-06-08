@@ -1,0 +1,187 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+#top-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #f0f0f0;
+    position: absolute;
+    top: 0;
+}
+
+#toolbar {
+    width: 200px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    border: 1px solid black;
+}
+
+.color-group {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.color, .tint {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.pen-size-slider {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.pen-size-slider label {
+    margin-right: 10px;
+}
+
+.pen-size-slider input {
+    margin-right: 10px;
+}
+
+#clearButton, #bucketButton, #penButton, #eraserButton, #rectButton, #circleButton, #lineButton, #arrowButton, #undoButton, #redoButton {
+    margin-top: 20px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    color: black; /* Make text black */
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#clearButton {
+    background-color: #d9534f;
+}
+
+#bucketButton {
+    background-color: #5bc0de;
+}
+
+#penButton {
+    background-color: #5cb85c;
+}
+
+#eraserButton {
+    background-color: #f0ad4e;
+}
+
+#undoButton {
+    background-color: #f0f0f0;
+    color: black;
+}
+
+#redoButton {
+    background-color: #f0f0f0;
+    color: black;
+}
+
+#saveButton, #loadButton {
+    margin-left: 10px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    color: black; /* Make text black */
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#saveButton {
+    background-color: #5cb85c;
+}
+
+#loadButton {
+    background-color: #5bc0de;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: 8px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content button {
+    color: black; /* Make text black */
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.dropdown-content button:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.selected {
+    border: 2px solid #000;
+}
+
+/* Specific color adjustments */
+.color[data-color="rgb(0,128,0)"] {
+    background-color: rgb(0,128,0); /* Green */
+}
+
+.tint[data-color="rgb(51,153,51)"] {
+    background-color: rgb(51,153,51); /* Darker Green */
+}
+
+.tint[data-color="rgb(102,204,102)"] {
+    background-color: rgb(102,204,102); /* Lighter Green */
+}
+

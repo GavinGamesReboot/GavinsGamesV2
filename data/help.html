@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - Gavin’s Games</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Help (how to contact and bug forms are mcleancountyunit5 locked)</h1>
+        <div class="nav-links">
+            <a class="nav-link" href="../OPEN%20WEBSITE%20HERE.html">Home</a>
+            <a class="nav-link" href="other_games.html">Other Games</a>
+            <a class="nav-link" href="help.html">Help & Support</a>
+            <a class="nav-link" href="tools.html">Tools</a>
+            <a class="nav-link" href="emulators.html">Emulators</a>
+        </div>
+    </header>
+    <div class="container" id="gridContainer">
+        <div class="grid-item" data-name="Gavin’s Games Padlet">
+            <a href="https://padlet.com/GavinsGames/gavinsgames-d4ruea3ph69ftk5d" target="_blank">
+                <img src="help/photos/padlet.png" alt="Padlet">
+                <p>Gavin’s Games Padlet</p>
+            </a>
+        </div>
+        <div class="grid-item" data-name="How to Contact Me">
+            <a href="https://docs.google.com/presentation/d/1Ej2kgoaOY8e68RS8zTdEY4P32Y-3xI7JQzOzNDDqgHI/edit#slide=id.p" target="_blank">
+                <img src="help/photos/slides.png" alt="How to Contact Me">
+                <p>How to Contact Me</p>
+            </a>
+        </div>
+        <div class="grid-item" data-name="Game Suggestion and Bug Form">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeE6ukLL4MlgmWw9u3gQWIp4dkRc5m3g5ZuvMq82QSkPevpog/viewform" target="_blank">
+                <img src="help/photos/forms.png" alt="Game Suggestion and Bug Form">
+                <p>Game Suggestion and Bug Form</p>
+            </a>
+        </div>
+        <div class="grid-item" data-name="Game Suggestion and Bug Form">
+            <a href="https://www.buymeacoffee.com/GavinsGames">
+                <img src="help/photos/buymeacoffee.png" alt="Buy Me A Coffee">
+                <p>Buy Me A Coffee</p>
+            </a>
+        </div>
+        <div class="grid-item" data-name="My Patreon">
+            <a href="https://patreon.com/GavinsGamesReboot?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink">
+                <img src="help/photos/patreon.png" alt="My Patreon">
+                <p>My Patreon</p>
+            </a>
+        </div>
+        <!-- Add more help blocks as needed -->
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const items = document.querySelectorAll('#gridContainer .grid-item');
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('fade-in');
+                }, index * 50); // 50ms interval between each item
+            });
+        });
+    </script>
+    <footer>
+        Developed and Created by Gavin James Caldwell
+    </footer>
+</body>
+</html>

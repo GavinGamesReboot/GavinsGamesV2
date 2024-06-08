@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./styles_menu.css" rel="stylesheet">
+    <link href="./styles_game.css" rel="stylesheet">
+    <link rel="icon" href="images/favicon.jpg">
+    <title>FNAF 4 Web</title>
+</head>
+<body oncontextmenu="return false">
+    
+    <audio id="flashlight" autoloop src="audio/light.ogg"></audio>
+    <audio id="ambience" autoloop src="audio/ambience.ogg"></audio>
+    <audio id="menumusic" autoloop src="audio/menu.ogg"></audio>
+    <audio id="walking" autoloop src="audio/walking.ogg"></audio>
+    <audio id="freddle" autoloop src="audio/freddles.ogg"></audio> 
+    <audio id="screamer" autoloop src="audio/screamer.ogg"></audio> 
+    <audio id="breathing" autoloop src="audio/breathing.ogg"></audio> 
+    <audio id="footstep-bonnie" autoloop src="audio/steps_bonnie.ogg"></audio> 
+    <audio id="footstep-chica" autoloop src="audio/steps_chica.ogg"></audio> 
+    <audio id="door-close" autoloop src="audio/door-close.ogg"></audio> 
+    <audio id="door-open" autoloop src="audio/door-open.ogg"></audio> 
+    <audio id="foxy-right" autoloop src="audio/steps_foxy_right.ogg"></audio> 
+    <audio id="foxy-left" autoloop src="audio/steps_foxy_left.ogg"></audio> 
+    <audio id="foxy-back" autoloop src="audio/steps_foxy_middle.ogg"></audio> 
+    <audio id="clock-alarm" autoloop src="audio/clock-alarm.ogg"></audio> 
+    <div id="game">
+        <img src="./images/tutorials/tutorial-front.png" oncontextmenu="return false" id="game-render">
+        <p id="clock">12 AM</p>
+        <div id="black-screen-game"></div>
+        <div id="turn-left" onmousedown="leftClickHandler()" onmouseover="leftLook()" ></div>
+        <div id="go-front" onmousedown="middleClickHandler()"></div>
+        <div id="turn-right" onmousedown="rightClickHandler()" onmouseover="rightLook()"></div>
+        <div id="turn-back" onmouseover="lookBack()" ></div>
+        <img src="images/misc/hidebutton.png" onclick="hideTips()" id="hide-button">
+    </div>
+    <div id="menu-div">
+        <img src="/fnafweb/images/misc/logo1.png" id="logo">
+        <button id="play-button" onclick="startGame()" class="text-red">PLAY</button>
+        <div id="edu-purposes">
+            <p class="text-red">Made by Fyrekitten and PeeOnYou!. All right go to their respected owners</p>
+            <p class="text-red">Only one night available with no Fredbear/Nightmare. Five Nights at Freddy's made by Scott Cawthon</p>
+        </div>
+        <div id="black-screen"></div>
+        <div id="disclaimer">
+            <div>
+                <p class="text-red">WARNING!</p>
+                <p class="text-red">THIS GAME CONTAINS FLASHING LIGHTS, LOUD NOISES, AND JUST</p>
+                <p class="text-red">A "little" BIT OF JUMPSCARES</p>
+            </div>
+        </div>
+    </div>
+    <div id="night-finished">
+        <div id="congrats-text">
+            <div>
+                <h1 class="text-red">YOU'RE AMAZING!</h1>
+                <p class="text-red">Thanks for playing!</p>
+                <p class="text-red">You can enjoy full FNAF 4 experience by buying</p>
+                <p class="text-red">this game and supporting it's original developer!</p>
+                <br>
+                <p class="text-red">You miss A LOT of content by playing just this</p>
+                <p class="text-red">version, lol!</p>
+            </div>
+        </div>
+        <div id="hours-minutes">
+            <p id="clock-placeholder">00:00</p>
+            <p id="some-time" class="text-red">05:59</p>
+        </div>
+    </div>
+    <img src="images/misc/dead.png" id="dead-screen">
+    <script type="text/javascript" src="script/controls.js"></script>
+    <script type="text/javascript" src="script/menu.js"></script>
+    <script type="text/javascript" src="script/visuals.js"></script>
+    <script type="text/javascript" src="script/ai.js"></script>
+</body>
+</html>

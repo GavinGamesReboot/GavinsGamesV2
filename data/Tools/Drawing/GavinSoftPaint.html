@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Drawing and Coloring</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="instruction-text" style="text-align: center; margin-bottom: 10px;">
+        If size is wrong, hold ctrl and then click - or + depending on what size you would like everything to be.
+    </div>
+    <div id="top-toolbar">
+        <div class="dropdown">
+            <button class="dropbtn">Shapes</button>
+            <div class="dropdown-content">
+                <button id="rectButton">Rectangle</button>
+                <button id="circleButton">Circle</button>
+                <button id="lineButton">Line</button>
+                <button id="arrowButton">Arrow</button>
+            </div>
+        </div>
+        <button id="saveButton">Save</button>
+        <button id="loadButton">Load</button>
+        <input type="file" id="fileInput" accept="image/png, image/jpeg" style="display:none;">
+    </div>
+    <div id="toolbar">
+        <div class="color-group">
+            <div class="color" style="background-color: black;" data-color="rgb(0,0,0)"></div>
+            <div class="tint" style="background-color: #333333;"></div>
+            <div class="tint" style="background-color: #666666;"></div>
+        </div>
+        <div class="color-group">
+            <div class="color" style="background-color: white; border: 1px solid black;" data-color="rgb(255,255,255)"></div>
+            <div class="tint" style="background-color: #F0F0F0;"></div>
+            <div class="tint" style="background-color: #E0E0E0;"></div>
+        </div>
+        <div class="color-group">
+            <div class="color" style="background-color: red;" data-color="rgb(255,0,0)"></div>
+            <div class="tint" style="background-color: #FF3333;"></div>
+            <div class="tint" style="background-color: #FF6666;"></div>
+        </div>
+        <div class="color-group">
+            <div class="color" style="background-color: orange;" data-color="rgb(255,165,0)"></div>
+            <div class="tint" style="background-color: #FFB733;"></div>
+            <div class="tint" style="background-color: #FFC966;"></div>
+        </div>
+        <div class="color-group">
+            <div class="color" style="background-color: yellow;" data-color="rgb(255,255,0)"></div>
+            <div class="tint" style="background-color: #FFFF33;"></div>
+            <div class="tint" style="background-color: #FFFF66;"></div>
+        </div>
+        <div class="color-group">
+            <div class="color" style="background-color: green;" data-color="rgb(0,128,0)"></div>
+            <div class="tint" style="background-color: #339933;"></div>
+            <div class="tint" style="background-color: #66CC66;"></div>
+        </div>
+        <div class="color-group">
+            <div class="color" style="background-color: blue;" data-color="rgb(0,0,255)"></div>
+            <div class="tint" style="background-color: #3333FF;"></div>
+            <div class="tint" style="background-color: #6666FF;"></div>
+        </div>
+        <div class="color-group">
+            <div class="color" style="background-color: indigo;" data-color="rgb(75,0,130)"></div>
+            <div class="tint" style="background-color: #6A0DAD;"></div>
+            <div class="tint" style="background-color: #8B2CD1;"></div>
+        </div>
+        <div class="color-group">
+            <div class="color" style="background-color: violet;" data-color="rgb(238,130,238)"></div>
+            <div class="tint" style="background-color: #F1A9F1;"></div>
+            <div class="tint" style="background-color: #F5CCF5;"></div>
+        </div>
+        <div class="color-group">
+            <div class="color" style="background-color: brown;" data-color="rgb(165,42,42)"></div>
+            <div class="tint" style="background-color: #B5651D;"></div>
+            <div class="tint" style="background-color: #D2691E;"></div>
+        </div>
+        <div class="pen-size-slider">
+            <label for="penSize">Pen Size: </label>
+            <input type="range" id="penSize" name="penSize" min="1" max="50" value="5">
+            <span id="penSizeValue">5</span>
+        </div>
+        <button id="clearButton">Clear</button>
+        <button id="bucketButton">Paint Bucket</button>
+        <button id="penButton">Pen</button>
+        <button id="eraserButton">Eraser</button>
+        <button id="undoButton">Undo</button>
+        <button id="redoButton">Redo</button>
+    </div>
+    <div id="canvas-container">
+        <canvas id="drawingCanvas" width="1200" height="900"></canvas>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
