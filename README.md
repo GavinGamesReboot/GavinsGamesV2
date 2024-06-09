@@ -12,7 +12,7 @@ I also own three websites:
 
 [GavinsGames.com](https://gavinsgames.com)
 
-[GavinsCaldwell.com](https://gavincaldwell.com)
+[GavinCaldwell.com](https://gavincaldwell.com)
 
 ## Contributing
 
