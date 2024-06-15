@@ -64,6 +64,25 @@ In the appropriate HTML file (`OPEN WEBSITE HERE.html`, `other_games.html`, `too
 </div>
 ```
 
+4. **Add New Flash Roms**
+
+Upload Your SWF Files
+
+Place your SWF files in the roms/flashroms/ directory. Ensure that the filenames are unique and descriptive.
+
+Update the Dropdown Menu
+
+Open the index.html file (or the relevant HTML file where the dropdown is located) and add an entry for each new SWF file. Here’s an example of how to add a new file:
+
+```
+<select id="file-list">
+    <option value="">Select a file</option>
+    <option value="roms/flashroms/3d_space_car.swf">3D Space Car</option>
+    <!-- Add new SWF files here -->
+    <option value="roms/flashroms/new_flash_game.swf">New Flash Game</option>
+</select>
+```
+
 5. **Commit Your Changes**
 
 Add and commit your changes:
