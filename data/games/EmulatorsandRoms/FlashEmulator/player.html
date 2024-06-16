@@ -30,11 +30,47 @@
 <script src="c1c1a8b2293497a31e49.wasm.js"></script>
 <script src="ruffle.js"></script>
 <script>
-const urlParams = new URLSearchParams(window.location.search);
-const file = urlParams.get('file');
-const isDataURL = urlParams.get('isDataURL') === 'true';
+function dataURLtoBlobURL(dataURL){
+  try {
+    var byteString = atob(dataURL.split(',')[1]);
+    var mime = dataURL.split(',')[0].split(':')[1].split(';')[0];
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (i = 0; i < byteString.length; i++){
+      ia[i] = byteString.charCodeAt(i);
+    }
+    var blob = new Blob([ab], { type: mime });
+    return URL.createObjectURL(blob);
+  } catch (error) {
+    alert('Failed to convert data URL to Blob URL');
+    console.error('Failed to convert data URL to Blob URL:', error);
+  }
+}
 
-if (file) {
+const urlParams = new URLSearchParams(window.location.search);
+const channel = (urlParams.get('channel') || null);
+const file = urlParams.get('file');
+
+if (channel) {
+  document.title = channel;
+  const bc = new BroadcastChannel(channel);
+  
+  bc.onmessage = (event) => {
+    if (event.data.type === 'swf') {
+      var dataURL = event.data.data;
+      var blobURL = dataURLtoBlobURL(dataURL);
+      loadSWF(blobURL);
+      bc.postMessage({ type: 'close' });
+      bc.close();
+    }
+  };
+} else if (file) {
+  loadSWF(file);
+} else {
+  console.error('No file or channel provided');
+}
+
+function loadSWF(url) {
   const rufflePlayer = window.RufflePlayer.newest();
   const container = document.createElement('div');
   container.id = 'container';
@@ -46,19 +82,7 @@ if (file) {
   player.style.width = '100%';
   player.style.height = '100%';
   container.appendChild(player);
-  if (isDataURL) {
-    fetch(file)
-      .then(response => response.blob())
-      .then(blob => {
-        const objectURL = URL.createObjectURL(blob);
-        player.load(objectURL);
-      })
-      .catch(error => console.error('Error loading data URL:', error));
-  } else {
-    player.load(file);
-  }
-} else {
-  console.error('No file provided');
+  player.load(url);
 }
 </script>
 </body>
