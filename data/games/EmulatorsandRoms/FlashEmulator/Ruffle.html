@@ -148,23 +148,37 @@
             <option value="roms/flashroms/SuperSmash.swf">Super Smash</option>
             <option value="roms/flashroms/taxi-gone--wild.swf">Taxi Gone Wild</option>
             <option value="roms/flashroms/ultemet%20sonic%20flash.swf">Ultimate Sonic Flash</option>
+            <option value="file-dialog">Upload a file...</option>
           </select>
+          <input type="file" id="local-file" accept=".swf" class="hidden">
+          <label for="local-file" id="local-file-label">Select File</label>
+          <span id="local-file-name">No file selected.</span>
         </div>
       </div>
     </div>
   </div>
   <script>
     var fileList = document.getElementById("file-list");
+    var localFileInput = document.getElementById("local-file");
     var allCont = document.getElementById("allCont");
 
     fileList.addEventListener("change", (e) => {
-      handleFileSelect(e.target.value);
+      if (e.target.value === "file-dialog") {
+        localFileInput.click();
+      } else {
+        handleFileSelect(e.target.value);
+      }
     });
 
-    function handleFileSelect(filePath) {
-      if (!filePath) return;
+    localFileInput.addEventListener("change", (e) => {
+      if (e.target.files.length > 0) {
+        const file = e.target.files[0];
+        handleFileSelect(file, true);
+      }
+    });
 
-      console.log('Selected file path:', filePath);
+    function handleFileSelect(file, isLocal = false) {
+      if (!file) return;
 
       allCont.innerHTML = '';
 
@@ -174,8 +188,40 @@
       frame.style.height = '100%';
       frame.style.margin = '0';
       frame.style.padding = '0';
-      frame.src = "player.html?file=" + encodeURIComponent(filePath);
-      document.body.appendChild(frame);
+      if (isLocal) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var dataURL = e.target.result;
+          var channel = generateRandomString();
+          const bc = new BroadcastChannel(channel);
+
+          frame.src = "player.html?channel=" + channel;
+          document.body.appendChild(frame);
+          frame.onload = function () {
+            bc.postMessage({ type: "swf", data: dataURL });
+          };
+
+          bc.onmessage = (event) => {
+            if (event.data.type === 'close') {
+              bc.close();
+            }
+          };
+        };
+        reader.readAsDataURL(file);
+      } else {
+        frame.src = "player.html?file=" + encodeURIComponent(file);
+        document.body.appendChild(frame);
+      }
+    }
+
+    function generateRandomString() {
+      var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      var result = '';
+      for (var i = 0; i < 10; i++) {
+        var randomIndex = Math.floor(Math.random() * chars.length);
+        result += chars.charAt(randomIndex);
+      }
+      return result;
     }
   </script>
 </body>
