@@ -30,90 +30,36 @@
 <script src="c1c1a8b2293497a31e49.wasm.js"></script>
 <script src="ruffle.js"></script>
 <script>
-function loadScripts(scripts, callback){
-  var loadedCount = 0;
-  function scriptLoaded(){
-    loadedCount++ ;
-    if(loadedCount === scripts.length){
-      callback(null);
-    }
-  }
-  scripts.forEach(function (script){
-    var scriptTag = document.createElement('script');
-    scriptTag.src = script;
-    scriptTag.onload = scriptLoaded;
-    scriptTag.onerror = function() {
-      callback(new Error('Failed to load script: ' + script));
-    };
-    document.head.appendChild(scriptTag);
-  });
-}
-
-function dataURLtoBlobURL(dataURL){
-  try {
-    var byteString = atob(dataURL.split(',')[1]);
-    var mime = dataURL.split(',')[0].split(':')[0];
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
-    for (i = 0; i < byteString.length; i++){
-      ia[i] = byteString.charCodeAt(i);
-    }
-    var blob = new Blob([ab], {
-      type : mime
-    });
-    return URL.createObjectURL(blob);
-  } catch (error) {
-    alert('Failed to convert data URL to Blob URL');
-    console.error('Failed to convert data URL to Blob URL:', error);
-  }
-}
-
 const urlParams = new URLSearchParams(window.location.search);
-const filePath = urlParams.get('file');
-const channel = (urlParams.get('channel') || 'swf_channel');
+const file = urlParams.get('file');
+const isDataURL = urlParams.get('isDataURL') === 'true';
 
-document.title = channel;
-
-const bc = new BroadcastChannel(channel);
-
-if (filePath) {
+if (file) {
   const rufflePlayer = window.RufflePlayer.newest();
   const container = document.createElement('div');
   container.id = 'container';
+  container.style.width = '100%';
+  container.style.height = '100%';
   document.body.appendChild(container);
 
   const player = rufflePlayer.createPlayer();
   player.style.width = '100%';
   player.style.height = '100%';
   container.appendChild(player);
-  player.load(filePath);
+  if (isDataURL) {
+    fetch(file)
+      .then(response => response.blob())
+      .then(blob => {
+        const objectURL = URL.createObjectURL(blob);
+        player.load(objectURL);
+      })
+      .catch(error => console.error('Error loading data URL:', error));
+  } else {
+    player.load(file);
+  }
 } else {
-  console.error('No file path provided');
+  console.error('No file provided');
 }
-
-bc.onmessage = (event) => {
-    var eventType = (event.data.type);
-    var eventData = (event.data.data);
-    
-   if (eventType == 'swf') {
-    var dataURL = eventData;
-    var blobURL = dataURLtoBlobURL(dataURL);
-    var embed = document.createElement('embed');
-    embed.width = '100%';
-    embed.height = '100%';
-    embed.name = 'plugin';
-    embed.id = 'plugin';
-    embed.type = 'application/x-shockwave-flash';
-    embed.src = blobURL;
-    document.body.appendChild(embed);
-    bc.postMessage({type: 'close'});
-    bc.close();
-   }
-    
-   if (eventType == 'close') {
-    bc.close();
-   }
-};
 </script>
 </body>
 </html>
