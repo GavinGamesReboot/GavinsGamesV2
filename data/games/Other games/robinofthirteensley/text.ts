@@ -1,0 +1,22 @@
+const font = makeAnim(fontData);
+
+function printText(x: number, y: number, text: string, onlyMeasure: boolean = false) {
+  let xx = x;
+  repeat( text.length, (i) => {
+    let c = byteAt(text, i);
+    if (c === 32) {
+      xx += 4; 
+    } else if (c === 10) {
+      xx = x; y += 8; 
+    } else {
+      let cel = font.cels[c-33];
+      let cnvs = cel.planes[0].cnvs;
+      if (!onlyMeasure) {
+        drawImage( cnvs, xx, y + cel.y );
+      }
+      xx += cnvs.width + 1;
+    }
+  })
+  return xx - x;
+}
+

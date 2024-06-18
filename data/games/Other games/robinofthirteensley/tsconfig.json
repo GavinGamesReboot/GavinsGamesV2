@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+      "lib": ["es5", "es6", "dom"],
+      "target": "es2022",
+      "rootDir": "./",
+      "outFile": "../game.js",
+      "removeComments": false,
+      "allowJs": true
+  },
+  "include": [
+    "math.ts",
+    "zzfx.js",
+    "guitar.ts",
+    "illustration.ts",
+    "events.ts",
+    "camera.ts",
+    "anim.ts",
+    "tilemap.ts",
+    "palette.ts",
+    "data.ts",
+    "text.ts",
+    "forest.ts",
+    "keys.ts",
+    "guy.ts",
+    "enemy.ts",
+    "dialog.ts",
+    "scenes.ts",
+    "main.ts",
+    "debug.ts",
+  ]
+}
