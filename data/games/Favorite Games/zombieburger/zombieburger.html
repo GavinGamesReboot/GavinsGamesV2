@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BACK</title>
+    <link rel='stylesheet' href='css.css'>
+</head>
+<body>
+<div id='camera' class='a'>
+    <div class='cont' id='cont'>
+
+    </div>
+</div>
+<div class='a' id='gui'><div id='money'></div><div id='time'></div>
+    <div class='a'>
+        Player Controlls:<br>
+        <b>ASDW:</b> Move<br>
+        <b>E:</b> Pick up item<br>
+        <b>Q:</b> Drop item<br>
+        <b>Space:</b> Interact<br>
+    </div>
+    <div id='p2c' class='a'>
+        Player 2 Controlls:<br>
+        <b>Arrows:</b> Move<br>
+        <b>Enter:</b> Pick up item<br>
+        <b>RShift:</b> Drop item<br>
+        <b>Numpad 0:</b> Interact<br>
+    </div>
+    <div id='lvltxt'>
+        Story story story <br> Story story story
+    </div>
+</div>
+<div class='a' id='end'>
+    <div id='card' class='rectangle'>
+        <div id='lvl'></div>
+            <div class='a' id='win'>
+
+            <div id='moneymade'></div>
+            <div id='rec'>NEW RECORD!!!</div>
+        </div>
+        <div class='a' id='lost'><br>GAME<br>OVER</div>
+        <div class='b s1 button' onclick='tomenu()'>X</div>
+        <div class='b s2 button' onclick='start(data.currentlevel)'>↻</div>
+        <div id='next' class='b s3 button' onclick='start(data.currentlevel+1)'>⇨</div>
+
+    </div>
+</div>
+<div class='a' id='menu'>
+    <div class='rectangle' id='maps'>
+
+    </div>
+    <div class='a' id='main'>
+        <div id='title'>ZombieBurger</div>
+        <div class='b but2' onclick='tomenu(false)'>Singleplayer</div>
+        <div class='b but2' onclick='tomenu(true)'>Multiplayer</div>
+    </div>
+</div>
+
+</body>
+<script src='js.js'></script>
+<script src='models.js'></script>
+<script src='controlls.js'></script>
+<script>
+
+    //Setting special properties for items and objects
+    var objectdata = {};
+    var itemdata = {};
+    for(var i in models)
+    {
+        objectdata[i] = [];
+        itemdata[i] = {cancombine:[],squishable:false};
+    }
+    objectdata.counter.placeitems = true;
+    objectdata.ammobox.placeitems = true;
+    objectdata.stove.placeitems = true;
+
+    for(var i of ['tomato','lettuce','onion','cheese'])
+    {
+        itemdata[i].squishable = itemdata[i + 'slices'].squishable = true;
+        itemdata[i].color = itemdata[i + 'slices'].color = get_color(i + 'slices');
+    }
+    itemdata.bowl.cancombine = itemdata.knife.cancombine = itemdata.riotshield.cancombine = itemdata.pistol.cancombine = ['tomatoslices','onionslices','lettuceslices','cheeseslices'];
+    itemdata.hamburger.cancombine = ['tomatoslices','onionslices','lettuceslices','cheeseslices','burger','zombieburger'];
+
+
+
+
+    //Level start function
+    function start(num)
+    {
+        data.currentlevel = num;
+        loadlevel(levels[num]);
+        change_barriercolor();
+        s('menu').hidden = true;
+        s('end').hidden = true;
+        data.running = buttons_active = true;
+        get_money(0);
+    }
+
+    //To level selection screen
+    function tomenu(p)
+    {
+        drawmenu();
+        if(p != undefined)data.multi = p;
+        if(!p)s('p2c').hidden = 1;
+        s('menu').hidden = false;
+        s('main').hidden = true;
+        s('maps').style.display = 'flex';
+
+    }
+
+    //Redraw level selection screen
+    function drawmenu()
+    {
+        s('maps').innerHTML = '';
+        for(var i = 0; i < 9; ++i)
+        {
+            var elem = cd('mapelem');
+            elem.appendChild(cd('sbox'));
+            if(savefile[i][0])
+            {
+                elem.className += ' b';
+                elem.style.background = 'firebrick';
+                for(var j = 1; j < 4; ++j)
+                {
+                    var elem2 = cd('minis');
+                    elem2.style.setProperty('--color', (savefile[i][j] ? 'yellow' : 'black'));
+                    elem.lastChild.appendChild(elem2);
+
+                }
+                elem.innerHTML += (i + 1);
+                //elem.setAttribute('n',i);
+                elem.n=i;
+
+                elem.onclick = function(){start(this.n)};
+
+            }
+            else
+            {
+
+                elem.style.background = '#333';
+                elem.lastChild.innerHTML = 'LOCKED';
+            }
+
+            s('maps').appendChild(elem);
+
+        }
+    }
+
+    drawmenu();
+    
+    //Custom CSS for game title and main menu buttons
+    for(var i = 0; i < 2; ++i)
+    {
+        var bum = cr(80,10,'#F5B062', 'translateY('+(i<1?-15:11)+'vmin) rotate('+(i*180)+'deg)');
+        bum.style.borderTopLeftRadius = bum.style.borderTopRightRadius = '10vmin';
+        s('title').appendChild(bum);
+    }
+    s('title').appendChild(cr(80,3,'yellow', 'translateY(-7.5vmin)'));
+    var elem = create_person(0,1,'lightgoldenrodyellow','#EEE');
+    elem.style.transform = 'translateY(8vmin) translateX(-22.5vmin)';
+
+
+    document.querySelectorAll('.but2')[0].appendChild(elem);
+
+    var elem = create_person(0,1,'lightgoldenrodyellow','#EEE');
+    elem.style.transform = 'translateY(8vmin) translateX(-25vmin) translateZ(-3vmin)  rotateY(-30deg)';
+    document.querySelectorAll('.but2')[1].appendChild(elem);
+
+    var elem = create_person(0,1,'saddlebrown','#EEE');
+    elem.style.transform = 'translateY(8vmin) translateX(-19vmin) translateZ(3vmin) rotateY(22deg)';
+    document.querySelectorAll('.but2')[1].appendChild(elem);
+
+    s('maps').style.display = 'none';
+    data.running = buttons_active = false;
+
+    for(var i = 1; i < 7; ++i)s('win').appendChild(cd('s'+Math.round(i/2)+' star' + (i%2==0?'m':'')));
+
+</script>
+</html>
