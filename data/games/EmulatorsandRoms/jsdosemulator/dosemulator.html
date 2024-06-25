@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline DOS Emulator</title>
+    <link rel="stylesheet" href="js-dos.css">
+    <script src="js-dos.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #333;
+            color: white;
+        }
+        #dosbox {
+            width: 90%;
+            height: 80vh;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Offline DOS Emulator</h1>
+    <div id="dosbox"></div>
+
+    <script>
+        (async () => {
+            const canvas = document.getElementById("dosbox");
+            const runtime = await Dos(canvas, { wdosboxUrl: "wdosbox.js" });
+
+            runtime.fs.createFile("AUTOEXEC.BAT", `@echo off
+cd games
+YOUR_GAME_EXECUTABLE.exe`);
+
+            // Adjust the game file and executable name as needed
+            await runtime.fs.extract("games/YOUR_GAME_FILE.zip");
+            runtime.main(["-c", "AUTOEXEC.BAT"]);
+        })();
+    </script>
+</body>
+</html>
