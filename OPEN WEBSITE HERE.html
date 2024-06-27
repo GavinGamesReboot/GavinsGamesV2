@@ -7,7 +7,17 @@
     <link rel="stylesheet" href="data/styles.css">
 </head>
 <body>
-    <header>
+    <div id="menuScreen">
+        <h1 id="title">GavinsGames</h1>
+        <p id="version" class="smashed">V2</p>
+        <button id="englishButton">English</button>
+        <button id="spanishButton">Español</button>
+        <p id="welcomeMessage" style="display:none;"></p>
+        <p id="disclaimerMessage" style="display:none;"></p>
+        <button id="startButton" style="display:none;">Start</button>
+    </div>
+
+    <header id="mainContent" style="display:none;">
         <h1>Gavin's Games</h1>
         <div class="nav-links">
             <a class="nav-link" href="OPEN%20WEBSITE%20HERE.html">Home</a>
@@ -261,6 +271,69 @@
                     item.classList.add('fade-in');
                 }, index * 50); // 50ms interval between each item
             });
+
+            // Menu screen logic
+            const menuScreen = document.getElementById('menuScreen');
+            const title = document.getElementById('title');
+            const version = document.getElementById('version');
+            const englishButton = document.getElementById('englishButton');
+            const spanishButton = document.getElementById('spanishButton');
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            const disclaimerMessage = document.getElementById('disclaimerMessage');
+            const startButton = document.getElementById('startButton');
+            const mainContent = document.getElementById('mainContent');
+
+            if (!localStorage.getItem('isNewUser')) {
+                localStorage.setItem('isNewUser', 'false');
+                menuScreen.style.display = 'flex';
+
+                englishButton.addEventListener('click', function() {
+                    englishButton.classList.add('slide-middle');
+                    spanishButton.classList.add('fade-out');
+                    setTimeout(() => {
+                        englishButton.style.transform = 'translateX(0)';
+                        spanishButton.style.opacity = '0';
+                    }, 1500);
+                    setTimeout(() => {
+                        welcomeMessage.textContent = "Welcome to my game website! I am thrilled to have you here as a user, so you can enjoy all the games I have given to you. Enjoy the new features, new games, and more!";
+                        showWelcomeMessage();
+                    }, 2000); // 2 seconds delay
+                });
+
+                spanishButton.addEventListener('click', function() {
+                    spanishButton.classList.add('slide-middle');
+                    englishButton.classList.add('fade-out');
+                    setTimeout(() => {
+                        spanishButton.style.transform = 'translateX(0)';
+                        englishButton.style.opacity = '0';
+                    }, 1500);
+                    setTimeout(() => {
+                        welcomeMessage.textContent = "¡Bienvenido a mi sitio web de juegos! Estoy emocionado de tenerte aquí como usuario, para que puedas disfrutar de todos los juegos que te he dado. ¡Disfruta de las nuevas funciones, nuevos juegos y más!";
+                        disclaimerMessage.textContent = "Desafortunadamente, para los hablantes de español, el sitio web y los juegos no serán traducidos. Solo este mensaje será traducido, pero las imágenes deberían proporcionar suficiente detalle sobre lo que podría ser el juego. Lamentamos los inconvenientes.";
+                        showWelcomeMessage();
+                    }, 2000); // 2 seconds delay
+                });
+
+                function showWelcomeMessage() {
+                    welcomeMessage.style.display = 'block';
+                    welcomeMessage.classList.add('fade-in');
+                    if (disclaimerMessage.textContent) {
+                        disclaimerMessage.style.display = 'block';
+                        disclaimerMessage.classList.add('fade-in');
+                    }
+                    setTimeout(() => {
+                        startButton.style.display = 'block';
+                        startButton.classList.add('fade-in');
+                    }, 5000); // 5 seconds after message appears
+                }
+
+                startButton.addEventListener('click', function() {
+                    menuScreen.style.display = 'none';
+                    mainContent.style.display = 'block';
+                });
+            } else {
+                mainContent.style.display = 'block';
+            }
         });
     </script>
     <footer>
