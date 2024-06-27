@@ -17,9 +17,14 @@
             <a class="nav-link" href="data/emulators.html">Emulators</a>
         </div>
     </header>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search...">
-        </div>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <select id="sortOptions">
+            <option value="default">Default Order</option>
+            <option value="name-asc">A-Z</option>
+            <option value="name-desc">Z-A</option>
+        </select>
+    </div>
     <div class="container" id="gridContainer">
         <div class="grid-item" data-name="SuperMario64">
             <a href="data/games/Favorite%20Games/SuperMario64/SuperMario64.html" target="_blank">
@@ -156,7 +161,7 @@
         <div class="grid-item" data-name="Bloons Tower Defense 5">
             <a href="data/games/Favorite%20Games/g/bloonstowerdefense5.html" target="_blank">
                 <img src="data/games/Favorite%20Games/g/images/bloonstd5.png" alt="Bloons Tower Defense 5">
-                <p>Bloons TD5</p>
+                <p>Bloons Tower Defense 5</p>
             </a>
         </div>
         <div class="grid-item" data-name="The Impossible Quiz">
@@ -222,19 +227,30 @@
     </div>
     <script>
         const searchInput = document.getElementById('searchInput');
+        const sortOptions = document.getElementById('sortOptions');
         const gridContainer = document.getElementById('gridContainer');
-        const gridItems = gridContainer.getElementsByClassName('grid-item');
+        const gridItems = Array.from(gridContainer.getElementsByClassName('grid-item'));
 
         searchInput.addEventListener('input', function() {
             const filter = searchInput.value.toLowerCase();
-            for (let i = 0; i < gridItems.length; i++) {
-                const item = gridItems[i];
+            for (const item of gridItems) {
                 const name = item.getAttribute('data-name').toLowerCase();
-                if (name.includes(filter)) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
+                item.style.display = name.includes(filter) ? '' : 'none';
+            }
+        });
+
+        sortOptions.addEventListener('change', function() {
+            const option = sortOptions.value;
+            let sortedItems;
+            if (option === 'name-asc') {
+                sortedItems = [...gridItems].sort((a, b) => a.getAttribute('data-name').localeCompare(b.getAttribute('data-name')));
+            } else if (option === 'name-desc') {
+                sortedItems = [...gridItems].sort((a, b) => b.getAttribute('data-name').localeCompare(a.getAttribute('data-name')));
+            } else {
+                sortedItems = gridItems; // Default order
+            }
+            for (const item of sortedItems) {
+                gridContainer.appendChild(item);
             }
         });
 

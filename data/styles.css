@@ -41,6 +41,14 @@ header::before {
     border-radius: 5px;
 }
 
+.search-container select {
+    padding: 10px;
+    font-size: 21px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 .nav-links {
     margin-top: 10px;
 }
@@ -84,8 +92,8 @@ header::before {
     transition: all 0.5s ease;
 }
 
- .grid-item.fade-in {
-     opacity: 1;
+.grid-item.fade-in {
+    opacity: 1;
 }
 
 .grid-item img {
