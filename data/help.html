@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help - Gavin’s Games</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body.grid-background {
+            background-repeat: repeat;
+        }
+        body.full-background {
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -58,7 +67,64 @@
                     item.classList.add('fade-in');
                 }, index * 50); // 50ms interval between each item
             });
+
+            loadTheme();
         });
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const lastUsedCustomTheme = localStorage.getItem('lastUsedCustomTheme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else if (lastUsedCustomTheme) {
+                applyCustomTheme(lastUsedCustomTheme);
+            }
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.style.setProperty('--text-color', 'white');
+                document.documentElement.style.setProperty('--primary-color', '#1c1c1c');
+                document.documentElement.style.setProperty('--secondary-color', 'black');
+                document.documentElement.style.setProperty('--button-color', '#555');
+                document.documentElement.style.setProperty('--text-bg-color', '#333');
+                document.body.style.backgroundImage = '';
+                document.body.classList.remove('grid-background', 'full-background');
+            } else if (theme === 'light') {
+                document.documentElement.style.setProperty('--text-color', 'black');
+                document.documentElement.style.setProperty('--primary-color', 'white');
+                document.documentElement.style.setProperty('--secondary-color', 'gray');
+                document.documentElement.style.setProperty('--button-color', 'gray');
+                document.documentElement.style.setProperty('--text-bg-color', '#f9f9f9');
+                document.body.style.backgroundImage = '';
+                document.body.classList.remove('grid-background', 'full-background');
+            }
+        }
+
+        function applyCustomTheme(slot) {
+            const customTheme = JSON.parse(localStorage.getItem(`customTheme${slot}`));
+            if (customTheme) {
+                document.documentElement.style.setProperty('--text-color', customTheme.textColor);
+                document.documentElement.style.setProperty('--primary-color', customTheme.primaryColor);
+                document.documentElement.style.setProperty('--secondary-color', customTheme.secondaryColor);
+                document.documentElement.style.setProperty('--button-color', customTheme.buttonColor);
+                document.documentElement.style.setProperty('--text-bg-color', customTheme.textBgColor);
+                if (customTheme.backgroundImage) {
+                    document.body.style.backgroundImage = `url(${customTheme.backgroundImage})`;
+                    document.body.classList.toggle('grid-background', customTheme.backgroundStyle === 'grid');
+                    document.body.classList.toggle('full-background', customTheme.backgroundStyle === 'full');
+                } else {
+                    document.body.style.backgroundImage = '';
+                    document.body.classList.remove('grid-background', 'full-background');
+                }
+            }
+        }
+
+        function setBackgroundStyle(style) {
+            backgroundStyle = style;
+            document.body.classList.toggle('grid-background', style === 'grid');
+            document.body.classList.toggle('full-background', style === 'full');
+        }
     </script>
     <footer>
         Developed and Created by Gavin James Caldwell
