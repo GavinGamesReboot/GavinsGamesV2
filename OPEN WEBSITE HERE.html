@@ -297,6 +297,7 @@
             <button onclick="setBackgroundStyle('grid')">Grid</button>
             <button onclick="setBackgroundStyle('full')">Full</button>
         </div>
+        <p>Make sure to add the image last when designing, otherwise it will not save.</p>
     </div>
     <script>
         const searchInput = document.getElementById('searchInput');
@@ -491,6 +492,7 @@
             localStorage.setItem('lastUsedCustomTheme', slot);
             localStorage.removeItem('theme'); // Clear the light/dark theme selection
         }
+
 
         function showColorPicker(target) {
             currentColorTarget = target;
