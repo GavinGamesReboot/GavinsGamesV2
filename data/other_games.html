@@ -665,6 +665,8 @@
             <button onclick="setBackgroundStyle('grid')">Grid</button>
             <button onclick="setBackgroundStyle('full')">Full</button>
         </div>
+        <p>Make sure to add the image last when designing, otherwise it will not save.</p>
+        <button onclick="location.href='data/tools/drawing/gavinsoftpaint.html'">Don't have an image? Design one here!</button>
     </div>
     <script>
         const searchInput = document.getElementById('searchInput');
@@ -859,6 +861,7 @@
             localStorage.setItem('lastUsedCustomTheme', slot);
             localStorage.removeItem('theme'); // Clear the light/dark theme selection
         }
+
 
         function showColorPicker(target) {
             currentColorTarget = target;
