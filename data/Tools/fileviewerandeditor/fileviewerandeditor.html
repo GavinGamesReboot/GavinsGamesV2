@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline File Viewer and Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <input type="file" id="fileInput" class="file-input">
+        <button class="save-button" onclick="saveFile()">Save</button>
+        <button class="convert-button" onclick="convertTo('html')">Convert to HTML</button>
+        <button class="convert-button" onclick="convertTo('css')">Convert to CSS</button>
+        <button class="convert-button" onclick="convertTo('js')">Convert to JS</button>
+        <input type="text" id="customType" class="file-input" placeholder="Custom type...">
+        <button class="convert-button" onclick="convertToCustom()">Convert to Custom</button>
+    </div>
+    <div class="container">
+        <h1>Offline File Viewer and Editor</h1>
+        <textarea id="textView" class="text-view" placeholder="Your file content will appear here..."></textarea>
+    </div>
+    <script src="script.js"></script>
+</footer>
+I only spent like 5 mins max on this, so it's gonna look crappy, but its functional I guess.
+</footer>
+</body>
+</html>
