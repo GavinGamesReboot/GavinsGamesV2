@@ -54,14 +54,7 @@
       height: 32px;
     }
 
-    #file-picker select,
-    #file-picker input,
-    #author {
-      margin-left: 5px;
-    }
-
-    #local-file-container,
-    #sample-swfs-container {
+    #local-file-container {
       display: inline-block;
       vertical-align: middle;
     }
@@ -92,19 +85,14 @@
     }
 
     @media only screen and (max-width: 800px) {
-      #local-file-container,
-      #sample-swfs-container {
-        display: block;
-      }
-
       #local-file-container {
+        display: block;
         margin-bottom: 10px;
       }
     }
 
     @media only screen and (max-width: 600px) {
-      #local-file-static-label,
-      #sample-swfs-label {
+      #local-file-static-label {
         display: block;
         margin-bottom: 5px;
       }
@@ -126,8 +114,7 @@
       <div id="file-picker">
         <div id="local-file-container">
           <span id="local-file-static-label">Select SWF file:</span>
-          </select>
-          <input type="file" id="local-file" accept=".swf" class="hidden">
+          <input type="file" id="local-file" accept=".swf">
           <label for="local-file" id="local-file-label">Select File</label>
           <span id="local-file-name">No file selected.</span>
         </div>
@@ -135,17 +122,8 @@
     </div>
   </div>
   <script>
-    var fileList = document.getElementById("file-list");
     var localFileInput = document.getElementById("local-file");
     var allCont = document.getElementById("allCont");
-
-    fileList.addEventListener("change", (e) => {
-      if (e.target.value === "file-dialog") {
-        localFileInput.click();
-      } else {
-        handleFileSelect(e.target.value);
-      }
-    });
 
     localFileInput.addEventListener("change", (e) => {
       if (e.target.files.length > 0) {
