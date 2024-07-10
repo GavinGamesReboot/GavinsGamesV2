@@ -53,9 +53,7 @@ window.onload = function() {
     document.querySelectorAll('.tint').forEach(tint => {
         tint.addEventListener('click', function() {
             currentColor = this.style.backgroundColor;
-            const parentColor = this.parentNode.querySelector('.color');
-            parentColor.setAttribute('data-color', currentColor);
-            updateSelectedColor(parentColor);
+            updateSelectedColor(this);
         });
     });
 
