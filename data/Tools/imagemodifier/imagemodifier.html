@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Image Modifier</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Offline Image Modifier</h1>
+    <input type="file" id="upload" accept="image/*">
+    <div id="resolution"></div>
+    <canvas id="canvas"></canvas>
+    <div>
+        <label for="width">Width (px):</label>
+        <input type="number" id="width" placeholder="Width" oninput="updateDimensions('width')">
+        <label for="height">Height (px):</label>
+        <input type="number" id="height" placeholder="Height" oninput="updateDimensions('height')">
+        <label for="aspect-ratio">Maintain Aspect Ratio</label>
+        <input type="checkbox" id="aspect-ratio" checked>
+        <button onclick="resizeByPixels()">Resize by Pixels</button>
+    </div>
+    <div>
+        <label for="percentage">Resize (%):</label>
+        <input type="number" id="percentage" placeholder="Percentage">
+        <button onclick="resizeByPercentage()">Resize by Percentage</button>
+    </div>
+    <div>
+        <button onclick="removeBackground()">Remove Background</button>
+    </div>
+    <div>
+        <button onclick="downloadImage()">Download Image</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
