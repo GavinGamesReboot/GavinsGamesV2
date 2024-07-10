@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Dot Art Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Image to Dot Art Converter</h1>
+        <input type="file" id="imageInput" accept="image/*">
+        <div class="options">
+            <label for="maxChars">Max Characters:</label>
+            <input type="number" id="maxChars" min="1" max="10000" value="100">
+            
+            <label for="widthFactor">Width Factor:</label>
+            <input type="number" id="widthFactor" min="1" value="1">
+
+            <label for="heightFactor">Height Factor:</label>
+            <input type="number" id="heightFactor" min="1" value="1">
+            
+            <label for="coloringOption">Coloring Option:</label>
+            <select id="coloringOption">
+                <option value="whiteOnBlack">White on Black</option>
+                <option value="blackOnWhite">Black on White</option>
+            </select>
+        </div>
+        <button id="convertButton">Convert to Dot Art</button>
+        <button id="copyButton">Copy to Clipboard</button>
+        <pre id="dotArt"></pre>
+    </div>
+    <footer>
+        <button id="resetButton">Reset</button>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
