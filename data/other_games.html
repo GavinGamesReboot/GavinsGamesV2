@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Other Games - Gavin’s Games</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="imageforwebsite/gavinsgames.ico" type="image/x-icon">
     <style>
         body.grid-background {
             background-repeat: repeat;
@@ -13,11 +14,23 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+        .logo-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-title img {
+            margin-right: 10px;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Other Games</h1>
+        <div class="logo-title">
+            <img src="imageforwebsite/gavinsgames.png" alt="Gavin's Games Logo">
+            <h1>Other Games</h1>
+        </div>
         <div class="nav-links">
             <a class="nav-link" href="../OPEN%20WEBSITE%20HERE.html">Home</a>
             <a class="nav-link" href="other_games.html">Other Games</a>
@@ -35,6 +48,7 @@
         </select>
     </div>
     <div class="container" id="gridContainer">
+
         <!-- Grid items will be added here -->
         <div class="grid-item" data-name="zigzag">
             <a href="games/Other%20games/zigzag/zigzag.html" target="_blank">
