@@ -21,6 +21,7 @@ document.querySelectorAll('input[name="coloring"]').forEach(el => el.addEventLis
 document.getElementById('maxChars').addEventListener('input', generateDotArt);
 document.getElementById('horizontalGap').addEventListener('input', generateDotArt);
 document.getElementById('verticalGap').addEventListener('input', generateDotArt);
+document.getElementById('clearWords').addEventListener('input', generateDotArt);
 
 function generateDotArt() {
     if (!img) {
@@ -34,6 +35,7 @@ function generateDotArt() {
     const coloring = document.querySelector('input[name="coloring"]:checked').value;
     const horizontalGap = parseFloat(document.getElementById('horizontalGap').value);
     const verticalGap = parseFloat(document.getElementById('verticalGap').value);
+    const clearWords = document.getElementById('clearWords').checked;
 
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
@@ -61,9 +63,17 @@ function generateDotArt() {
 
             let char = '';
             if (brightness < threshold) {
-                char = coloring === 'whiteOnBlack' ? '⣿' : '⠂';
+                if (clearWords) {
+                    char = '.';
+                } else {
+                    char = coloring === 'whiteOnBlack' ? '⣿' : '⠂';
+                }
             } else {
-                char = coloring === 'whiteOnBlack' ? '⠂' : '⣿';
+                if (clearWords) {
+                    char = ' ';
+                } else {
+                    char = coloring === 'whiteOnBlack' ? '⠂' : '⣿';
+                }
             }
 
             dotArt += char;
@@ -91,6 +101,7 @@ document.getElementById('resetButton').addEventListener('click', function() {
     document.querySelector('input[name="coloring"][value="whiteOnBlack"]').checked = true;
     document.getElementById('horizontalGap').value = '2';
     document.getElementById('verticalGap').value = '1';
+    document.getElementById('clearWords').checked = false;
     document.getElementById('dotArt').textContent = '';
     img = null;
 });
