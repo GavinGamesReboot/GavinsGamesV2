@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Gavin’s Games</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="imageforwebsite/gavinsgames.ico" type="image/x-icon">
+    <style>
+        body.grid-background {
+            background-repeat: repeat;
+        }
+        body.full-background {
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .logo-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-title img {
+            margin-right: 10px;
+            height: 50px;
+        }
+        .about-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .about-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .developer-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .developer-profile img {
+            border-radius: 50%;
+            margin-right: 20px;
+            width: 100px;
+            height: 100px;
+        }
+        .developer-profile h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .developer-profile p {
+            margin: 5px 0 0 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-title">
+            <img src="imageforwebsite/gavinsgames.png" alt="Gavin's Games Logo">
+            <h1>About</h1>
+        </div>
+        <div class="nav-links">
+            <a class="nav-link" href="../OPEN%20WEBSITE%20HERE.html">Home</a>
+            <a class="nav-link" href="other_games.html">Other Games</a>
+            <a class="nav-link" href="help.html">Help & Support</a>
+            <a class="nav-link" href="tools.html">Tools</a>
+            <a class="nav-link" href="emulators.html">Emulators</a>
+        </div>
+    </header>
+    <div class="about-container">
+        <div class="about-header">
+            <h1>About Us</h1>
+            <p>Welcome to Gavin’s Games! We are a passionate team of developers dedicated to creating innovative and enjoyable games and tools for everyone.</p>
+        </div>
+        <div class="developer-profile">
+            <img src="imageforwebsite/gavin.jpg" alt="Gavin Caldwell">
+            <div>
+                <h2>Gavin Caldwell</h2>
+                <p>Main Developer / Owner</p>
+                <p>Gavin is the driving force behind Gavin’s Games, bringing his creativity and technical expertise to every project. His vision and leadership ensure the highest quality in our products.</p>
+            </div>
+        </div>
+        <div class="developer-profile">
+            <img src="imageforwebsite/jayden.jpg" alt="Jayden Valeu">
+            <div>
+                <h2>Jayden Valeu</h2>
+                <p>Secondary Developer / Co-Owner</p>
+                <p>Jayden's dedication and skills complement Gavin's work perfectly, contributing to the seamless functionality and innovation of our games and tools.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadTheme();
+        });
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const lastUsedCustomTheme = localStorage.getItem('lastUsedCustomTheme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else if (lastUsedCustomTheme) {
+                applyCustomTheme(lastUsedCustomTheme);
+            }
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.style.setProperty('--text-color', 'white');
+                document.documentElement.style.setProperty('--primary-color', '#1c1c1c');
+                document.documentElement.style.setProperty('--secondary-color', 'black');
+                document.documentElement.style.setProperty('--button-color', '#555');
+                document.documentElement.style.setProperty('--text-bg-color', '#333');
+                document.body.style.backgroundImage = '';
+                document.body.classList.remove('grid-background', 'full-background');
+            } else if (theme === 'light') {
+                document.documentElement.style.setProperty('--text-color', 'black');
+                document.documentElement.style.setProperty('--primary-color', 'white');
+                document.documentElement.style.setProperty('--secondary-color', 'gray');
+                document.documentElement.style.setProperty('--button-color', 'gray');
+                document.documentElement.style.setProperty('--text-bg-color', '#f9f9f9');
+                document.body.style.backgroundImage = '';
+                document.body.classList.remove('grid-background', 'full-background');
+            }
+        }
+
+        function applyCustomTheme(slot) {
+            const customTheme = JSON.parse(localStorage.getItem(`customTheme${slot}`));
+            if (customTheme) {
+                document.documentElement.style.setProperty('--text-color', customTheme.textColor);
+                document.documentElement.style.setProperty('--primary-color', customTheme.primaryColor);
+                document.documentElement.style.setProperty('--secondary-color', customTheme.secondaryColor);
+                document.documentElement.style.setProperty('--button-color', customTheme.buttonColor);
+                document.documentElement.style.setProperty('--text-bg-color', customTheme.textBgColor);
+                if (customTheme.backgroundImage) {
+                    document.body.style.backgroundImage = `url(${customTheme.backgroundImage})`;
+                    document.body.classList.toggle('grid-background', customTheme.backgroundStyle === 'grid');
+                    document.body.classList.toggle('full-background', customTheme.backgroundStyle === 'full');
+                } else {
+                    document.body.style.backgroundImage = '';
+                    document.body.classList.remove('grid-background', 'full-background');
+                }
+            }
+        }
+
+        function setBackgroundStyle(style) {
+            backgroundStyle = style;
+            document.body.classList.toggle('grid-background', style === 'grid');
+            document.body.classList.toggle('full-background', style === 'full');
+        }
+    </script>
+</body>
+</html>
